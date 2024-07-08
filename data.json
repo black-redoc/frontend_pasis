@@ -1,0 +1,27 @@
+{
+  "TDCFFZAMBS1": {
+    "reintentos": "1",
+    "max_reintento": "10",
+    "recibido": false
+  },
+  "TDCFFZAMBS2": {
+    "reintentos": "1",
+    "max_reintento": "10",
+    "recibido": false
+  },
+  "TDCFFZAMBS3": {
+    "reintentos": "1",
+    "max_reintento": "10",
+    "recibido": false
+  },
+  "TDCFFZAMBS4": {
+    "reintentos": "1",
+    "max_reintento": "10",
+    "recibido": false
+  },
+  "TDCFFZAMBS5": {
+    "reintentos": "1",
+    "max_reintento": "10",
+    "recibido": false
+  }
+}

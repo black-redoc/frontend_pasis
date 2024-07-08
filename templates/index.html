@@ -1,0 +1,66 @@
+{% extends "./base.html" %}
+{% block title %}
+  Pasis Medios de Pago
+{% endblock title %}
+{% block css %}
+{% endblock css %}
+<style>
+label {
+  font-size: 20px;
+  font-weight: bold;
+}
+</style>
+{% block content %}
+  <section class="flex flex-col max:w-200px margin-auto">
+    <h1 class="w-full bg-secondary color-white p-1">Update Parameter Systems</h1>
+    <form class="form p-1" action="{{ url_for("params") }}" method="post">
+      <section>
+        <label for="name">Nombre parametro</label>
+        <input class="mt-1" list="param_list" name="param_name" id="name">
+        <datalist id="param_list">
+          {% for param in param_list %}<option value="{{ param }}"></option>{% endfor %}
+        </datalist>
+      </section>
+      <section class="flex w-full flex-col">
+        <article class="w-full flex gap-3">
+          <label for="name">Valor</label>
+          <button id="btn-file" class="btn bg-tertiary color-black white-space-nowrap">Subir archivo</button>
+        </article>
+        <article class="w-full">
+          <textarea class="mt-1 w-full" name="value" id="value" cols="30" rows="10"></textarea>
+          <input class="file-upload-input" type="file" name="file" id="file">
+        </article>
+      </section>
+      <button class="btn" type="submit">Enviar</button>
+    </form>
+  </section>
+{% endblock content %}
+{% block js %}
+  <script type="module">
+    const $ = document.querySelector.bind(document);
+    const $btnFile = $('#btn-file');
+    const $fileInput = $('.file-upload-input');
+    const $form = $('form')
+    const $value = $('#value');
+
+    $form.addEventListener('submit', function(e) {
+      e.preventDefault();
+    });
+    $btnFile.addEventListener('click', function(e) {
+      $fileInput.value = null;
+      $fileInput.click();
+    });
+    $fileInput.addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      const formData = new FormData();
+      formData.append('file', file);
+      fetch('{{ base_url }}/uploadfile', {
+        method: 'POST',
+        body: formData,
+      }).then(response => response.json())
+        .then(({data}) =>{
+          $value.value = data;
+        });
+    });
+  </script>
+{% endblock js %}
